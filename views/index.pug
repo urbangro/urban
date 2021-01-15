@@ -1,0 +1,17 @@
+extends layout
+
+block content
+    h1= title
+    include partials/messages
+    if app
+        p Welcome to #{app}
+
+    if errors && errors.length
+        div #{JSON.stringify(errors)}
+
+    // if login
+    include login.pug
+    // else
+    include register.pug
+
+    include oathlogin.pug

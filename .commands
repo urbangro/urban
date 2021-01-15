@@ -1,0 +1,3 @@
+DEBUG=urbangro:* npm start
+npm run start
+npm run dev

@@ -1,0 +1,22 @@
+h2 Login with email
+form(action="/users/login" method="POST")
+    div 
+        lable(for="name") Name
+        input(type="text", 
+            name="name", 
+            placeholder="Enter Name",
+            value=name?name:"")
+        br
+        lable(for="email") Email
+        input(type="email", 
+            name="email", 
+            placeholder="Enter Email",
+            value = email ? email : "")
+        br
+        lable(for="password") Password
+        input(type="password", 
+            name="password", 
+            placeholder="Enter Password"
+            value=password?password:"")
+
+    button(type="submit" class="btn btn-primary btn-block") Submit
