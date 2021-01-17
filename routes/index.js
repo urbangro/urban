@@ -20,7 +20,7 @@ router.get('/', function (req, res, next) {
 
     res.render('index',
         {
-            title: 'Register or Login using email',
+            title: 'Register or Login using only email',
             app: 'UrbanGro',
 
         });
