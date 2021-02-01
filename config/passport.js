@@ -1,7 +1,11 @@
+const dotenv = require('dotenv').config();
+
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
 const GoogleStratery = require('passport-google-oauth20').Strategy;
+const FacebookStratery = require('passport-facebook').Strategy;
+
 
 module.exports = function (passport) {
     passport.use(
@@ -34,8 +38,8 @@ module.exports = function (passport) {
     passport.use(
         new GoogleStratery(
             {
-                clientID: "746587013029-q3v9rka5ccf19kv2u80oup6obpip0veq.apps.googleusercontent.com",
-                clientSecret: "aU8bZG0yNbxbDG91rbUHAGXi",
+                clientID: process.env.GOOGLE_CLIENT_ID,
+                clientSecret: process.env.GOOGLE_CLIENT_SECRET,
                 callbackURL: '/auth/google/callback',
             },
             async (accessToken, refreshToken, profile, done) => {
@@ -46,6 +50,36 @@ module.exports = function (passport) {
 
                 try {
                     let user = await User.findOne({ googleId: profile.id });
+
+                    if (user) {
+                        done(null, user);
+                    } else {
+                        user = await User.create(newUser);
+                        done(null, user);
+                    }
+
+                } catch (err) {
+                    console.error(err);
+                }
+            }
+        )
+    )
+
+    passport.use(
+        new FacebookStratery(
+            {
+                clientID: process.env.FACEBOOK_CLIENT_ID,
+                clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+                callbackURL: '/auth/facebook/callback',
+            },
+            async (accessToken, refreshToken, profile, done) => {
+                const newUser = {
+                    facebookId: profile.id,
+                    //name: profile.name,
+                }
+
+                try {
+                    let user = await User.findOne({ facebookId: profile.id });
 
                     if (user) {
                         done(null, user);
