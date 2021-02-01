@@ -28,6 +28,7 @@ router.post('/register', (req, res, next) => {
     console.log('name: ' + name + ', email: ' + email + ', passwor:' + password);
 
     /**  Error Checking   **/
+    // TODO: enforce secure password format
     if (!name || !email || !password || !password2) {
         errors.push({ msg: 'All required fields cannot be empty' });
     }
@@ -35,7 +36,7 @@ router.post('/register', (req, res, next) => {
         errors.push({ msg: 'Passwords don\'t match' });
     }
     if (password.length < 6) {
-        errors.push({ msg: 'password length must be at least6' });
+        errors.push({ msg: 'password length must be at least 6' });
     }
 
     if (errors.length) {
@@ -64,7 +65,7 @@ router.post('/register', (req, res, next) => {
                                 console.log("Registered succesfully");
                                 console.log(value);
                                 req.flash('success_message', 'You have successfully registered!');
-                                res.redirect('../environment');
+                                res.redirect('../environment/dashboard');
                             })
                             .catch((err) => {
                                 console.log(err)

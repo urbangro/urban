@@ -20,22 +20,4 @@ router.post('/update', function (req, res, next) {
     res.render('environmentUpdate', { title: 'My Info' });
 });
 
-module.exports = store;
-var express = require('express');
-var router = express.Router();
-
-/**
- * 
- * Contact company for support
- */
-
-router.get('/', function (req, res, next) {
-    res.render('listUGInfo', { title: 'UrbanGro Info' });
-});
-
-router.post('/contact', function (req, res, next) {
-    res.render('contact', { title: 'Grow room environment' });
-});
-
-
 module.exports = router;

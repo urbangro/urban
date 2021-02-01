@@ -1,0 +1,78 @@
+extends layout
+
+block content
+    include partials/messages
+    h3 Your grow box
+    p#title #{title}
+    
+    div#param-container
+        div#room-temperature
+            div Temperature Auto Control : <em>#{(temperature.enabled ? "On" : "Off")}</em>
+            div Range : <em>#{temperature.high}</em> ~ <em>#{temperature.low}</em> °C
+        div#room-humidity
+            div Humidity Auto Control : <em>#{(humidity.enabled ? "On" : "Off")}</em>
+            div Range : <em>#{humidity.high}</em> ~ <em>#{humidity.low}</em> %
+        div#room-co2
+            div CO2 Auto Control : <em>#{(co2.enabled ? "On" : "Off")}</em>
+            div Range : <em>#{co2.high}</em> ~ <em>#{co2.low}</em> PPM
+        div#water-temperature
+            div Water Temperature Auto Control : <em>#{(waterTemperature.enabled ? "On" : "Off")}</em>
+            div Range : <em>#{waterTemperature.high}</em> ~ <em>#{waterTemperature.low}</em> °C
+        div#water-ph
+            div Water pH Auto Control : <em>#{(waterPh.enabled ? "On" : "Off")}</em>
+            div Range : <em>#{waterPh.high}</em> ~ <em>#{waterPh.low}</em>
+        div#nutrition-density
+            div Nutrition Auto Control : <em>#{(nutritionDensity.enabled ? "On" : "Off")}</em>
+            div Range : <em>#{nutritionDensity.high}</em> ~ <em>#{nutritionDensity.low}</em> PPM
+        div#main-light
+            div Main Light Auto Control : <em>#{(mainLight.enabled ? "On" : "Off")}</em>
+            div Turn On From <em>#{mainLight.turnOn.hour}:#{mainLight.turnOn.minute}</em> To <em>#{mainLight.turnOff.hour}:#{mainLight.turnOff.minute}</em>
+            div Veg Light : <em>#{(mainLight.vegLight ? "On" : "Off")}</em>
+            div Bloom Light : <em>#{(mainLight.bloomLight ? "On" : "Off")}</em>
+            div Far Red Light : <em>#{(mainLight.farRedLight ? "On" : "Off")}</em>
+        div#side-light
+            div Side Light Auto Control : <em>#{(sideLight ? "On" : "Off")}</em>
+        div#circulation
+            div Circulation Switch: <em>#{(airCirculation ? "On" : "Off")}</em>
+        div#carbon-filter
+            div Carbon Filter Switch : <em>#{(carbonFilter ? "On" : "Off")}</em>
+        div#water-air-pump
+            div Water Air Pump Switch : <em>#{(waterAirPump ? "On" : "Off")}</em>
+        div#camera
+            div Camera : <em>#{(camera.enabled ? "On" : "Off")}</em>
+            if camera.photoShoot.monday
+                | Monday :
+                ul 
+                    each val, index in camera.photoShoot.monday
+                        li= val.hour + ':' + val.minute                
+            if camera.photoShoot.tuesday
+                | Tuesday :
+                ul 
+                    each val, index in camera.photoShoot.tuesday
+                        li= val.hour + ':' + val.minute
+            if camera.photoShoot.wednesday
+                | Wednesday :
+                ul 
+                    each val, index in camera.photoShoot.wednesday
+                        li= val.hour + ':' + val.minute
+            if camera.photoShoot.thursday
+                | Thursday :
+                ul 
+                    each val, index in camera.photoShoot.thursday
+                        li= val.hour + ':' + val.minute
+            if camera.photoShoot.friday
+                | Friday :
+                ul 
+                    each val, index in camera.photoShoot.friday
+                        li= val.hour + ':' + val.minute
+            if camera.photoShoot.saturday
+                | Saturday :
+                ul 
+                    each val, index in camera.photoShoot.saturday
+                        li= val.hour + ':' + val.minute
+            if camera.photoShoot.sunday
+                | Sunday :
+                ul 
+                    each val, index in camera.photoShoot.sunday
+                        li= val.hour + ':' + val.minute                                                                                                                        
+    a(href='/users/logout') Logout

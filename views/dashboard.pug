@@ -2,5 +2,52 @@ extends layout
 
 block content
     include partials/messages
-    h3 Link your grow box 
+    h3 Your grow box summary
+    p#title #{title}
+
+    div#param-container
+        div#room-temperature Room Temperature : <em>#{aTemp}</em> °C
+        div#room-humidity   Room Humidity : <em>#{aHumi}</em> %
+        div#room-CO2        Room CO2 : <em>#{aCO2}</em> PPM
+
+        div#water-temperature Water Temperature : <em>#{wTemp}</em> °C
+        div#water-ph        Water pH : <em>#{wPH}</em>
+        div#water-nutrition Nutrition : <em>#{wPPM}</em> PPM
+        div#water-level     Water Level : <em>#{wLvl}</em>
+
+        div#light-main      Main Light : <em>#{lMain}</em>
+        div#light-side      Side Light : <em>#{lSide}</em>
+
     a(href='/users/logout') Logout
+
+    script(type="text/javascript").
+        const aTemp = document.getElementById("room-temperature").getElementsByTagName('em')[0]
+        const aHumi = document.getElementById("room-humidity").getElementsByTagName('em')[0]
+        const aCO2 = document.getElementById("room-CO2").getElementsByTagName('em')[0]
+
+        const wTemp = document.getElementById("water-temperature").getElementsByTagName('em')[0]
+        const wPH = document.getElementById("water-ph").getElementsByTagName('em')[0]
+        const wPPM = document.getElementById("water-nutrition").getElementsByTagName('em')[0]
+        const wLvl = document.getElementById("water-level").getElementsByTagName('em')[0]
+
+        const lMain = document.getElementById("light-main").getElementsByTagName('em')[0]
+        const lSide = document.getElementById("light-side").getElementsByTagName('em')[0]
+
+        function readEnvParam() {
+            request("GET", "http://localhost:3000/environment/getEnvParam", (e)=>{
+                let room = JSON.parse(e.responseText)
+                aTemp.innerHTML = room.ATEMP;
+                aHumi.innerHTML = room.AHUMI;
+                aCO2.innerHTML = room.ACO2;
+                wTemp.innerHTML = room.WTEMP;
+                wPH.innerHTML = room.WPH;
+                wPPM.innerHTML = room.WPPM;
+                wLvl.innerHTML = room.WLVL;
+                lMain.innerHTML = room.LIGM;
+                lSide.innerHTML = room.LIGS;
+            });
+
+            setTimeout(readEnvParam, 5000);
+        }
+
+        readEnvParam();    

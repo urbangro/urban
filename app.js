@@ -22,13 +22,6 @@ app.set('view engine', 'pug');
 
 /* Setup Logger */
 app.use(logger('dev'));
-// app.use(logger('combined')); // log complete request
-// You can set morgan to log differently depending on your environment
-// if (app.get('env') == 'production') {
-//   app.use(morgan('common', { skip: function(req, res) { return res.statusCode < 400 }, stream: __dirname + '/../morgan.log' }));
-// } else {
-//   app.use(morgan('dev'));
-// }
 app.use(session({
     secret: 'secret',
     resave: true,
