@@ -7,6 +7,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var environmentRouter = require('./routes/environment');
+const authRouter = require('./routes/auth');
 
 const passport = require('passport');
 require("./config/passport")(passport)
@@ -54,6 +55,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/environment', environmentRouter);
+app.use('/auth', authRouter);
 
 
 // catch 404 and forward to error handler
