@@ -39,15 +39,15 @@ body {
 /* Position text in the top-left corner */
 .topleft {
   position: absolute;
-  top: 0;
-  left: 16px;
+  top: min(89%, 600px);
+  left: max(5%, 115px);
 }
 
 /* Position text in the bottom-left corner */
 .bottomleft {
   position: absolute;
-  bottom: 0;
-  left: 220px;
+  top: 80%;
+  left: 8%;
 }
 
 /* Position text in the middle */
