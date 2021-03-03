@@ -1,0 +1,9 @@
+
+form(action="/users/subscribe" method="POST")
+    div 
+        input(type="email", 
+            name="email", 
+            placeholder="your_name@email.com",
+            value = email ? email : "")
+
+        button(type="submit" class="btn btn-primary btn-block") Notify Me

@@ -1,17 +1,24 @@
 extends layout
 
 block content
-    h1= title
-    include partials/messages
-    if app
-        p Welcome to #{app}
 
-    if errors && errors.length
-        div #{JSON.stringify(errors)}
+    link(rel='stylesheet', href='/stylesheets/index.css')
 
-    // if login
-    include login.pug
-    // else
-    include register.pug
+    // h1= title
+    // include partials/messages
 
-    include oathlogin.pug
+    // if app
+    //    p Welcome to #{app}
+
+    // if errors && errors.length
+    //    div #{JSON.stringify(errors)}
+    
+    // include login.pug // if login
+    // include register.pug // else
+    // include oathlogin.pug
+
+    div(class='bottomleft')
+        if submitted
+            h5 #{submitted}
+        else
+            include subscribe.pug
